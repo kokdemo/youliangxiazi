@@ -1,56 +1,60 @@
 <html>
 
-<body>
-    <script src="https://unpkg.com/vue@3"></script>
-
-    <div id="app">
-        <div class="container" @click="add()">
-            <like-block :level="level"></like-block>
-        </div>
-
-    </div>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G7T57XFY2C"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-G7T57XFY2C');
+    </script>
+    <title>有两下子</title>
+    <meta name="description" content="浏览器性能测试器">
     <style>
         .container {
             width: max-content;
             height: max-content;
         }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(2, auto);
             grid-template-rows: repeat(2, auto);
         }
-
         .grid-row>div:first-child {
             grid-area: 1 / 2 / 2 / 3;
         }
-
         .grid-row>div:nth-child(2) {
             grid-area: 2 / 2 / 3 / 3;
         }
-
         .grid-row>span {
             grid-area: 1 / 1 / 3 / 2;
             writing-mode: vertical-lr;
             text-align: justify;
             text-align-last: justify;
         }
-
         .grid-column>div:first-child {
             grid-area: 1 / 1 / 2 / 2;
         }
-
         .grid-column>div:nth-child(2) {
             grid-area: 1 / 2 / 2 / 3;
         }
-
         .grid-column>span {
             grid-area: 2 / 1 / 3 / 3;
             text-align: justify;
             text-align-last: justify;
         }
     </style>
+</head>
 
+
+<body>
+    <div id="app">
+        <div class="container" @click="add()">
+            <like-block :level="level"></like-block>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
     <script>
         function SectionToChinese(num) {
             if (!/^\d*(\.\d*)?$/.test(num)) {
@@ -89,27 +93,25 @@
             return re;
         }
         const { createApp } = Vue
-
         const app = createApp({
             data() {
                 return {
                     level: 0
                 }
             },
-            methods:{
-                add(){
-                    if(this.level>=4){
+            methods: {
+                add() {
+                    if (this.level >= 4) {
                         var confirm = window.confirm('点下去你的浏览器可能受不了，要继续吗？')
-                        if(confirm){
+                        if (confirm) {
                             this.level++
                         }
-                    }else{
+                    } else {
                         this.level++
                     }
-                    
                 }
             },
-            mounted(){
+            mounted() {
                 alert('点击文字，让你感受有两下子 作者 @kokdemo')
             }
         })
@@ -127,11 +129,11 @@
                         }
                     }
                 },
-                levelText(){
-                    return(SectionToChinese(Math.pow(2,this.level)))
+                levelText() {
+                    return (SectionToChinese(Math.pow(2, this.level)))
                 },
-                levelTextFontSize(){
-                    return('font-size:'+4*Math.pow(1.5,this.level)+"px;" )
+                levelTextFontSize() {
+                    return ('font-size:' + 4 * Math.pow(1.5, this.level) + "px;")
                 }
             },
             template: `
@@ -142,7 +144,6 @@
                 </div>
             `
         })
-
         app.mount('#app')
     </script>
 </body>
