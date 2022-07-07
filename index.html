@@ -56,6 +56,29 @@
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
+        var textMap = {
+            1:"一",
+            2:"两",
+            4:"四",
+            8:"八",
+            16:"十六",
+            32:"三十二",
+            64:"六十四",
+            128:"一百二十八",
+            256:"二百五十六",
+            512:"五百一十二",
+            1024:"一千零二十四",
+            2048:"两千零四十八",
+            4096:"四千零九十六",
+            8192:"八千一百九十二",
+            16384:"一万六千三百八十四",
+            32768:"三万两千七百六十八",
+            65536:"六万五千五百三十六",
+            131072:"十三万一千零七十二",
+            262144:"二十六万两千一百四十四",
+            524288:"五十二万四千两百八十八",
+            1048576:"一百零四万八千五百七十六"
+        }
         function SectionToChinese(num) {
             if (!/^\d*(\.\d*)?$/.test(num)) {
                 alert("Number is wrong!");
@@ -102,7 +125,12 @@
             methods: {
                 add() {
                     if (this.level >= 4) {
-                        var confirm = window.confirm('点下去你的浏览器可能受不了，要继续吗？')
+                        let confirm = window.confirm('点下去你的浏览器可能受不了，要继续吗？')
+                        if (confirm) {
+                            this.level++
+                        }
+                    } else if(this.level >=8 ){
+                        let confirm = window.confirm('你的浏览器性能有两下子，截图晒朋友圈或者即刻吧，还要继续吗？')
                         if (confirm) {
                             this.level++
                         }
@@ -112,7 +140,7 @@
                 }
             },
             mounted() {
-                alert('点击文字，让你感受有两下子 作者 @kokdemo')
+                alert('放大屏幕，点击左上角的文字，让你感受有两下子 作者 @kokdemo')
             }
         })
         app.component('likeBlock', {
@@ -130,10 +158,15 @@
                     }
                 },
                 levelText() {
-                    return (SectionToChinese(Math.pow(2, this.level)))
+                    if(this.level<20){
+                        return(textMap[Math.pow(2, this.level)])
+                    }else{
+                        return (SectionToChinese(Math.pow(2, this.level)))
+                    }
                 },
                 levelTextFontSize() {
-                    return ('font-size:' + 4 * Math.pow(1.5, this.level) + "px;")
+                    let size = 10 + 3 * this.level
+                    return ('font-size:' + size + "px;")
                 }
             },
             template: `
